@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Bowler Information";
+}
+@model List<Bowler>
+
+
+<div class="text-center">
+    <h1 class="display-4">All Bowlers-@ViewBag.Message</h1> <!--Heading for the web page, and viewbag to pass team name-->
+</div>
+<center><input type="button" class="btn btn-success btn-lg my-4" value="Add Record" onclick="window.location='@Url.Action( "AddBowler", "Home")'" /></center>
+<table class="table table-bordered table-striped">
+    <!--Creates table for the information-->
+    <thead class="font-weight-bold">
+        <tr>
+            <td>First Name</td>
+            <td>Middle Initial</td>
+            <td>Last Name</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Zip</td>
+            <td>Phone</td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var b in Model)
+        {
+        <tr>
+            <td>@b.BowlerFirstName</td>
+            <td>@b.BowlerMiddleInit</td>
+            <td>@b.BowlerLastName</td>
+            <td>@b.BowlerAddress</td>
+            <td>@b.BowlerCity</td>
+            <td>@b.BowlerState</td>
+            <td>@b.BowlerZip</td>
+            <td>@b.BowlerPhoneNumber</td>
+     
+            <!--Button To Edit Record-->
+            <td><a class="btn btn-warning" asp-controller="Home" asp-action="Edit" asp-route-bowlerid="@b.BowlerID">Edit</a></td>
+            <!--Button To Delete Record-->
+            <td><a class='btn btn-danger' asp-controller="Home" asp-action="Delete" asp-route-bowlerid="@b.BowlerID">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
